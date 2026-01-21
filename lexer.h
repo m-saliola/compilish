@@ -3,13 +3,20 @@
 #include <unordered_map>
 
 enum class TokenType {
+    // Literal Types
     Number,
+    String,
     Identifier,
+
+    // Grouping * Operators
     OpenParen,
     CloseParen,
     Semicolon,
     BinaryOperator,
     AssignmentOperator,
+    Endfile,
+
+    // Keywords
     Auto
 };
 

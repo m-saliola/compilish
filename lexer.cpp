@@ -11,7 +11,14 @@ std::vector<Token> tokenize(std::string source) {
 
     std::string buffer;
     while (iss.peek() != EOF) {
-        if (std::isspace(iss.peek())) {
+        if (iss.peek() == '\"') {
+            iss.get();
+            while (iss.peek() != EOF && iss.peek() != '\"') buffer += iss.get();
+            iss.get();
+            tokens.push_back({buffer, TokenType::String});
+            buffer.erase(buffer.begin(), buffer.end());
+            continue;
+        } else if (std::isspace(iss.peek())) {
             iss.get();
             continue;
         }
@@ -48,5 +55,6 @@ std::vector<Token> tokenize(std::string source) {
         }
     }
 
+    tokens.push_back({"Endfile", TokenType::Endfile});
     return tokens;
 }
